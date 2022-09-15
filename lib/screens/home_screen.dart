@@ -3,8 +3,9 @@ import 'package:assessment_app/logic/home/home_bloc.dart';
 import 'package:assessment_app/screens/info_screen.dart';
 import 'package:assessment_app/screens/assessment_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'info_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -137,14 +138,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(
                                     height: 50,
                                     child: ElevatedButton(
-                                        onPressed: () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            BlocProvider.of<HomeBloc>(context)
-                                                .add(VerifyCode(
-                                                    codeController.text));
+                                        onPressed: () async {
+                                          String barcodeScanRes;
+                                          try {
+                                            barcodeScanRes =
+                                                await FlutterBarcodeScanner
+                                                    .scanBarcode(
+                                                        '#ff6666',
+                                                        'Cancel',
+                                                        true,
+                                                        ScanMode.QR);
+                                            print(barcodeScanRes);
+                                          } on PlatformException {
+                                            barcodeScanRes =
+                                                'Failed to get platform version.';
                                           }
                                         },
+                                        // onPressed: () {
+                                        //   if (_formKey.currentState!
+                                        //       .validate()) {
+                                        //     BlocProvider.of<HomeBloc>(context)
+                                        //         .add(VerifyCode(
+                                        //             codeController.text));
+                                        //   }
+                                        // },
                                         child: const Text('Iniciar',
                                             style: TextStyle(fontSize: 20)))),
                               ],
