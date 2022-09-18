@@ -8,3 +8,4 @@ const Color kGreen = Color(0xFF9ccc65);
 const Color kDarkGreen = Color(0xFF689f38);
 const Color kRed = Color(0xFFef5350);
 const Color kBackground = Color(0xFFFAFAFA);
+const Color kCardBackground = Color(0xFFF5F5F5);

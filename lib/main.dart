@@ -22,13 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Avaliação Institucional de Disciplinas da Faculdade de Tecnologia da Unicamp",
-        theme:  ThemeData(
+        title:
+            "Avaliação Institucional de Disciplinas da Faculdade de Tecnologia da Unicamp",
+        theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: kBlue,
         ),
-        home: const HomeScreen()
-    );
+        home: const HomeScreen());
   }
 }
-
