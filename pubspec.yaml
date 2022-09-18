@@ -35,6 +35,8 @@ dependencies:
   flutter_bloc: ^8.0.1
   http: ^0.13.4
   flutter_barcode_scanner: ^2.0.0
+  intro_slider: ^3.0.10
+  universal_platform: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +62,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
+    - assets/images/graph.png
+    - assets/images/tasks.png
+    - assets/images/person.png
+    - assets/images/id.png
+    - assets/images/question.png
+    - assets/images/important.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

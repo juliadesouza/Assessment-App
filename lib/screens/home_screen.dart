@@ -1,12 +1,10 @@
 import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/logic/home/home_bloc.dart';
-import 'package:assessment_app/screens/info_screen.dart';
 import 'package:assessment_app/screens/assessment_screen.dart';
+import 'package:assessment_app/widgets/qrcode_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:intro_slider/intro_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'info_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,33 +14,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController codeController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  List<Slide> slides = [];
 
   @override
   Widget build(BuildContext context) {
+    
+  
+
     return Scaffold(
-      appBar: AppBar(
-          title: const Text("AVALIAÇÃO DA GRADUAÇÃO",
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.info),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const InfoScreen()),
-                );
-              },
-            ),
-          ]),
       body: BlocProvider(
         create: (context) => HomeBloc(),
         child: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
           if (state is AuthenticatedCode) {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    AssessmentScreen(code: codeController.text)));
+                builder: (context) => const AssessmentScreen(code: "c1c1")));
           }
 
           if (state is CodeError) {
@@ -76,104 +61,141 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         }, builder: (context, state) {
           if (state is UnauthenticatedCode) {
-            return LayoutBuilder(builder:
-                (BuildContext context, BoxConstraints viewportConstraints) {
-              return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: viewportConstraints.maxHeight,
+            return IntroSlider(
+              slides: [
+                Slide(
+                  widgetTitle: const Text(
+                    "AVALIAÇÃO INSTUCIONAL DE DISCIPLINAS",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: kBlue, fontWeight: FontWeight.bold, fontSize: 22),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Image.asset(
-                          'assets/images/logo.png',
-                          width: 250,
-                          height: 250,
+                  centerWidget: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Image.asset(
+                        'assets/images/logo.png',
+                        width: 270,
+                        height: 270,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 50, left: 50),
+                        child: const Text(
+                          "Avalie as disciplinas da FT em poucos minutos.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 22),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 10.0),
-                              child: Text(
-                                "Sua opinião em poucos minutos.",
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(fontSize: 28),
-                              ),
-                            ),
-                            Text(
-                                "Avaliação das disciplinas oferecidas na Faculdade de Tecnologia a fim de aperfeiçoar as condições e metodologias de ensino e aprendizagem.",
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(fontSize: 18)),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: TextFormField(
-                                        controller: codeController,
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            hintText: 'Código',
-                                            prefixIcon:
-                                                Icon(Icons.lock_outline)),
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Digite o código.';
-                                          }
-                                          return null;
-                                        })),
-                                SizedBox(
-                                    height: 50,
-                                    child: ElevatedButton(
-                                        onPressed: () async {
-                                          String barcodeScanRes;
-                                          try {
-                                            barcodeScanRes =
-                                                await FlutterBarcodeScanner
-                                                    .scanBarcode(
-                                                        '#ff6666',
-                                                        'Cancel',
-                                                        true,
-                                                        ScanMode.QR);
-                                            print(barcodeScanRes);
-                                          } on PlatformException {
-                                            barcodeScanRes =
-                                                'Failed to get platform version.';
-                                          }
-                                        },
-                                        // onPressed: () {
-                                        //   if (_formKey.currentState!
-                                        //       .validate()) {
-                                        //     BlocProvider.of<HomeBloc>(context)
-                                        //         .add(VerifyCode(
-                                        //             codeController.text));
-                                        //   }
-                                        // },
-                                        child: const Text('Iniciar',
-                                            style: TextStyle(fontSize: 20)))),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: SizedBox(
+                            height: 50, child: QRCodeButton(blocContext: context)),
+                      ),
+                    ],
+                  )),
+                Slide(
+                  widgetTitle: const Text(
+                    "INFORMAÇÕES",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: kBlue, fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                  pathImage: 'assets/images/graph.png',
+                  widthImage: 150,
+                  heightImage: 150,
+                  widgetDescription: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                        textAlign: TextAlign.justify,
+                        "Este instrumento tem como objetivo coletar informações para avaliar as disciplinas oferecidas na Faculdade de Tecnologia para que possamos aperfeiçoar as condições e metodologias de ensino e aprendizagem.",
+                        style: TextStyle(fontSize: 20)),
                   ),
                 ),
-              );
-            });
+                Slide(
+                  widgetTitle: const Text(
+                    "INFORMAÇÕES",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: kBlue, fontWeight: FontWeight.bold, fontSize: 24),
+                  ),
+                  pathImage: 'assets/images/tasks.png',
+                  widthImage: 150,
+                  heightImage: 150,
+                  widgetDescription: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                        textAlign: TextAlign.justify,
+                        "Uma parte do instrumento é formada por afirmações que você deve indicar o grau de concordância a elas, ou se a afirmação não se aplica para esta disciplina. Na outra parte do instrumento, você terá um espaço para indicar os aspectos positivos da disciplina e sugestões para melhorá-la.",
+                        style: TextStyle(fontSize: 20)),
+                  ),
+                ),
+                Slide(
+                    widgetTitle: const Text(
+                      "IMPORTANTE",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: kBlue, fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
+                    pathImage: "assets/images/important.png",
+                    widthImage: 150,
+                    heightImage: 150,
+                    widgetDescription: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20.0),
+                            child: ListTile(
+                              leading: Image.asset(
+                                'assets/images/question.png',
+                              ),
+                              title: const Text(
+                                'Existem 25 questões neste questionário.',
+                                style: TextStyle(fontSize: 18),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20.0),
+                            child: ListTile(
+                              leading: Image.asset(
+                                'assets/images/person.png',
+                              ),
+                              title: const Text(
+                                'O questionário é anônimo.',
+                                style: TextStyle(fontSize: 18),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20.0),
+                            child: ListTile(
+                              leading: Image.asset(
+                                'assets/images/id.png',
+                              ),
+                              title: const Text(
+                                'O registro de suas respostas não contém nenhuma informação de identificação sobre você.',
+                                style: TextStyle(fontSize: 18),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                )],
+                showNextBtn: false,
+                showPrevBtn: false,
+                showSkipBtn: false,
+                showDoneBtn: false,
+                backgroundColorAllSlides: kBackground,
+                colorDot: kGrey,
+                colorActiveDot: kBlue,
+            );
           }
 
           if (state is Authenticating) {

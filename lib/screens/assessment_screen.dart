@@ -5,11 +5,11 @@ import 'package:assessment_app/database/form_database.dart';
 import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
 import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/screens/answers_list.dart';
-import 'package:assessment_app/widgets/question_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../constants/enums.dart';
 import '../widgets/custom_stepper.dart';
+import '../widgets/question_widget.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({Key? key, required this.code}) : super(key: key);

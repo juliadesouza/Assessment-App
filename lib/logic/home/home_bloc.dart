@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../services/service.dart';
+import '../../services/api.dart';
 import '../../model/response.dart';
 part 'home_event.dart';
 part 'home_state.dart';
