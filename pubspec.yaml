@@ -37,6 +37,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   intro_slider: ^3.0.10
   universal_platform: ^1.0.0+1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
