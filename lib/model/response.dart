@@ -1,6 +1,9 @@
-class Response {
-  final bool response;
-  final String message;
+import 'package:assessment_app/model/classroom.dart';
 
-  Response(this.response, this.message);
+class Response {
+  final bool successfull;
+  final String message;
+  final Classroom? classroom;
+
+  Response(this.successfull, this.message, [this.classroom]);
 }

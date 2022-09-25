@@ -1,6 +1,7 @@
+import 'package:assessment_app/model/classroom.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../services/api.dart';
+import '../../services/service.dart';
 import '../../model/response.dart';
 part 'home_event.dart';
 part 'home_state.dart';
@@ -10,8 +11,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<VerifyCode>((event, emit) async {
       emit(Authenticating());
       Response response = await Service().verifyCode(event.code);
-      if (response.response) {
-        emit(AuthenticatedCode());
+      if (response.successfull) {
+        emit(AuthenticatedCode(response.classroom));
       } else {
         emit(CodeError("Código Inválido: ${response.message}"));
         emit(UnauthenticatedCode());

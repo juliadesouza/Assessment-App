@@ -4,7 +4,7 @@ import 'package:assessment_app/model/response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/form.dart';
-import '../../services/api.dart';
+import '../../services/service.dart';
 
 part 'assessment_event.dart';
 part 'assessment_state.dart';
@@ -26,7 +26,7 @@ class AssessmentBloc extends Bloc<AssessmentEvent, AssessmentState> {
       Form form = await _formDatabase.getForm();
       Response response = await Service().registerAssessment(form);
 
-      if (response.response) {
+      if (response.successfull) {
         emit(Sucessfull());
       } else {
         emit(Error(response.message));

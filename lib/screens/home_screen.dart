@@ -1,6 +1,7 @@
 import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/logic/home/home_bloc.dart';
-import 'package:assessment_app/screens/assessment_screen.dart';
+import 'package:assessment_app/model/classroom.dart';
+import 'package:assessment_app/screens/verification_screen.dart';
 import 'package:assessment_app/widgets/qrcode_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -18,16 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
-  
-
     return Scaffold(
       body: BlocProvider(
         create: (context) => HomeBloc(),
         child: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
           if (state is AuthenticatedCode) {
+            Classroom classroom = state.classroom!;
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const AssessmentScreen(code: "c1c1")));
+                builder: (context) =>
+                    VerificationScreen(classroom: classroom)));
           }
 
           if (state is CodeError) {
@@ -64,42 +64,47 @@ class _HomeScreenState extends State<HomeScreen> {
             return IntroSlider(
               slides: [
                 Slide(
-                  widgetTitle: const Text(
-                    "AVALIAÇÃO INSTUCIONAL DE DISCIPLINAS",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: kBlue, fontWeight: FontWeight.bold, fontSize: 22),
-                  ),
-                  centerWidget: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo.png',
-                        width: 270,
-                        height: 270,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(right: 50, left: 50),
-                        child: const Text(
-                          "Avalie as disciplinas da FT em poucos minutos.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 22),
+                    widgetTitle: const Text(
+                      "AVALIAÇÃO INSTUCIONAL DE DISCIPLINAS",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: kBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22),
+                    ),
+                    centerWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Image.asset(
+                          'assets/images/logo.png',
+                          width: 270,
+                          height: 270,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(50.0),
-                        child: SizedBox(
-                            height: 50, child: QRCodeButton(blocContext: context)),
-                      ),
-                    ],
-                  )),
+                        Container(
+                          margin: const EdgeInsets.only(right: 50, left: 50),
+                          child: const Text(
+                            "Avalie as disciplinas da FT em poucos minutos.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 22),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(50.0),
+                          child: SizedBox(
+                              height: 50,
+                              child: QRCodeButton(blocContext: context)),
+                        ),
+                      ],
+                    )),
                 Slide(
                   widgetTitle: const Text(
                     "INFORMAÇÕES",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: kBlue, fontWeight: FontWeight.bold, fontSize: 22),
+                        color: kBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
                   ),
                   pathImage: 'assets/images/graph.png',
                   widthImage: 150,
@@ -117,7 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     "INFORMAÇÕES",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: kBlue, fontWeight: FontWeight.bold, fontSize: 24),
+                        color: kBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
                   ),
                   pathImage: 'assets/images/tasks.png',
                   widthImage: 150,
@@ -131,70 +138,73 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Slide(
-                    widgetTitle: const Text(
-                      "IMPORTANTE",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: kBlue, fontWeight: FontWeight.bold, fontSize: 24),
+                  widgetTitle: const Text(
+                    "IMPORTANTE",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: kBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
+                  ),
+                  pathImage: "assets/images/important.png",
+                  widthImage: 150,
+                  heightImage: 150,
+                  widgetDescription: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20.0),
+                          child: ListTile(
+                            leading: Image.asset(
+                              'assets/images/question.png',
+                            ),
+                            title: const Text(
+                              'Existem 25 questões neste questionário.',
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20.0),
+                          child: ListTile(
+                            leading: Image.asset(
+                              'assets/images/person.png',
+                            ),
+                            title: const Text(
+                              'O questionário é anônimo.',
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20.0),
+                          child: ListTile(
+                            leading: Image.asset(
+                              'assets/images/id.png',
+                            ),
+                            title: const Text(
+                              'O registro de suas respostas não contém nenhuma informação de identificação sobre você.',
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    pathImage: "assets/images/important.png",
-                    widthImage: 150,
-                    heightImage: 150,
-                    widgetDescription: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 20.0),
-                            child: ListTile(
-                              leading: Image.asset(
-                                'assets/images/question.png',
-                              ),
-                              title: const Text(
-                                'Existem 25 questões neste questionário.',
-                                style: TextStyle(fontSize: 18),
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 20.0),
-                            child: ListTile(
-                              leading: Image.asset(
-                                'assets/images/person.png',
-                              ),
-                              title: const Text(
-                                'O questionário é anônimo.',
-                                style: TextStyle(fontSize: 18),
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 20.0),
-                            child: ListTile(
-                              leading: Image.asset(
-                                'assets/images/id.png',
-                              ),
-                              title: const Text(
-                                'O registro de suas respostas não contém nenhuma informação de identificação sobre você.',
-                                style: TextStyle(fontSize: 18),
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                )],
-                showNextBtn: false,
-                showPrevBtn: false,
-                showSkipBtn: false,
-                showDoneBtn: false,
-                backgroundColorAllSlides: kBackground,
-                colorDot: kGrey,
-                colorActiveDot: kBlue,
+                  ),
+                )
+              ],
+              showNextBtn: false,
+              showPrevBtn: false,
+              showSkipBtn: false,
+              showDoneBtn: false,
+              backgroundColorAllSlides: kBackground,
+              colorDot: kGrey,
+              colorActiveDot: kBlue,
             );
           }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:assessment_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,13 +16,13 @@ class QRCodeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        String barcodeScanRes;
         try {
-          barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-              '#ff6666', 'Cancelar', true, ScanMode.QR);
-          BlocProvider.of<HomeBloc>(blocContext).add(VerifyCode("c1c1"));
+          await FlutterBarcodeScanner.scanBarcode(
+                  '#ff6666', 'Cancelar', true, ScanMode.QR)
+              .then((barcodeScanRes) => BlocProvider.of<HomeBloc>(blocContext)
+                  .add(VerifyCode(barcodeScanRes)));
         } on PlatformException {
-          barcodeScanRes = 'Failed to get platform version.';
+          log("erro ao ler QR Code");
         }
       },
       style: ElevatedButton.styleFrom(

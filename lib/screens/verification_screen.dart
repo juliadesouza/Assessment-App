@@ -1,12 +1,16 @@
-import 'dart:ui';
+
 
 import 'package:assessment_app/constants/colors.dart';
+import 'package:assessment_app/model/classroom.dart';
 import 'package:assessment_app/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 
-class VerificationScreen extends StatelessWidget {
-  const VerificationScreen({Key? key}) : super(key: key);
+import 'assessment_screen.dart';
 
+class VerificationScreen extends StatelessWidget {
+  const VerificationScreen({Key? key, required this.classroom})
+      : super(key: key);
+  final Classroom classroom;
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
@@ -53,22 +57,33 @@ class VerificationScreen extends StatelessWidget {
                   )
                 ],
               ),
-              const CardWidget(
-                  title: "CÓDIGO", icon: Icons.lock, value: "SI200"),
-              const CardWidget(
+              CardWidget(
+                  title: "CÓDIGO",
+                  icon: Icons.lock,
+                  value: classroom.subjectCode.toUpperCase()),
+              CardWidget(
                   title: "DISCIPLINA",
                   icon: Icons.school,
-                  value: "PROGRAMAÇÃO ORIENTADA À OBJETOS I"),
-              const CardWidget(
-                  title: "TURMA", icon: Icons.people_alt, value: "A"),
-              const CardWidget(
+                  value: classroom.subjectName),
+              CardWidget(
+                  title: "TURMA",
+                  icon: Icons.people_alt,
+                  value: classroom.classCode
+                      .substring(classroom.classCode.length - 1)
+                      .toUpperCase()),
+              CardWidget(
                   title: "SEMESTRE",
                   icon: Icons.calendar_month,
-                  value: "2S 2022"),
+                  value:
+                      "${classroom.semester}º semestre de ${classroom.year}"),
               Container(
                 margin: const EdgeInsets.all(30),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            AssessmentScreen(code: classroom.classCode)));
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),

@@ -7,7 +7,8 @@ class Authenticating extends HomeState {}
 class UnauthenticatedCode extends HomeState {}
 
 class AuthenticatedCode extends HomeState {
-  AuthenticatedCode();
+  final Classroom? classroom;
+  AuthenticatedCode(this.classroom);
 }
 
 class CodeError extends HomeState {
