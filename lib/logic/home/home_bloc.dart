@@ -14,7 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (response.successfull) {
         emit(AuthenticatedCode(response.classroom));
       } else {
-        emit(CodeError("Código Inválido: ${response.message}"));
+        emit(CodeError("Código Inválido."));
         emit(UnauthenticatedCode());
       }
     });

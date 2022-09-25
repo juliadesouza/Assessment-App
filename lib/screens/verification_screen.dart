@@ -1,5 +1,6 @@
 import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/model/classroom.dart';
+import 'package:assessment_app/screens/home_screen.dart';
 import 'package:assessment_app/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'assessment_screen.dart';
@@ -24,9 +25,13 @@ class VerificationScreen extends StatelessWidget {
 
     return (Scaffold(
       appBar: AppBar(
-        title: const Text("VERIFICAÇÃO",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-      ),
+          title: const Text("VERIFICAÇÃO",
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const HomeScreen())),
+          )),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -41,40 +46,24 @@ class VerificationScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 10, bottom: 10, left: 5, right: 5),
                       child: ListTile(
-                        title: const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0),
-                          child: Text('Caro estudante,',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                        ),
-                        subtitle: avaliable
-                            ? Text(
+                          title: const Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
+                            child: Text('Caro estudante,',
                                 textAlign: TextAlign.justify,
-                                'Verifique as informações referentes a disciplina e depois clique no botão “Iniciar”.',
                                 style: TextStyle(
-                                    fontSize: 20, color: Colors.black),
-                              )
-                            : Column(
-                                children: [
-                                  Text(
-                                    textAlign: TextAlign.justify,
-                                    "A avaliação desta disciplina não está disponível.",
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: kRed,
-                                        fontSize: 18),
-                                  ),
-                                  Text(
-                                    textAlign: TextAlign.justify,
-                                    "Disponibilidade: ${classroom.initialDate} até ${classroom.finalDate}",
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  )
-                                ],
-                              ),
-                      ),
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                          ),
+                          subtitle: Text(
+                            !avaliable
+                                ? "A avaliação desta disciplina só está disponível de ${classroom.initialDate} até ${classroom.finalDate}."
+                                : 'Verifique as informações referentes a disciplina e depois clique no botão “Iniciar”.',
+                            style: TextStyle(
+                                fontWeight: !avaliable
+                                    ? FontWeight.w600
+                                    : FontWeight.normal,
+                                color: !avaliable ? kRed : Colors.black,
+                                fontSize: !avaliable ? 16 : 20),
+                          )),
                     ),
                   ),
                   Container(

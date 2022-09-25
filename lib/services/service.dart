@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import '../model/form.dart';
 import '../model/response.dart';
@@ -29,15 +30,15 @@ class Service {
 
     bool successfull =
         classResponse.statusCode == 200 && subjectResponse.statusCode == 200;
-    String message =
-        "${classResponse.reasonPhrase} em Turma e ${subjectResponse.reasonPhrase} em Disciplinas";
 
     if (successfull) {
       Classroom classroom = Classroom.fromJson(
           jsonDecode(classResponse.body), jsonDecode(subjectResponse.body));
-      return Response(successfull, message, classroom);
+      return Response(successfull, classroom);
     } else {
-      return Response(successfull, message);
+      log("Turmas: [${classResponse.statusCode}] - ${classResponse.reasonPhrase}");
+      log("Disciplinas: [${subjectResponse.statusCode}] - ${subjectResponse.reasonPhrase}");
+      return Response(successfull);
     }
   }
 
@@ -56,8 +57,7 @@ class Service {
     );
 
     bool successfull = response.statusCode == 201;
-    String message = "Código ${response.statusCode}: ${response.reasonPhrase}";
-
-    return Response(successfull, message);
+    log("Formulario: [${response.statusCode}] - ${response.reasonPhrase}");
+    return Response(successfull);
   }
 }

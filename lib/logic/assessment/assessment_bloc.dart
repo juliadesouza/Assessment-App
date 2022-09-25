@@ -29,7 +29,7 @@ class AssessmentBloc extends Bloc<AssessmentEvent, AssessmentState> {
       if (response.successfull) {
         emit(Sucessfull());
       } else {
-        emit(Error(response.message));
+        emit(Error("Não foi possível registrar sua avaliação."));
       }
     });
 
