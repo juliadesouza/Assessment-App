@@ -39,7 +39,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   List<List<CustomStep>> _steps(questions) {
     List<List<CustomStep>> result = [];
     List<CustomStep> arr = [];
-    int chunkSize = 5;
+    int chunkSize = 4;
     int state = 0;
 
     for (int i = 0; i < questions.length; i++) {

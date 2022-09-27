@@ -63,7 +63,6 @@ class ResultScreen extends StatelessWidget {
                             fontSize: 24, fontWeight: FontWeight.bold)),
                   ),
                   Text(errorMessage,
-                      textAlign: TextAlign.justify,
                       style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

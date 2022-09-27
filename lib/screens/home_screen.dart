@@ -112,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
-                        textAlign: TextAlign.justify,
                         "Este instrumento tem como objetivo coletar informações para avaliar as disciplinas oferecidas na Faculdade de Tecnologia para que possamos aperfeiçoar as condições e metodologias de ensino e aprendizagem.",
                         style: TextStyle(fontSize: 20)),
                   ),
@@ -132,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
-                        textAlign: TextAlign.justify,
                         "Uma parte do instrumento é formada por afirmações que você deve indicar o grau de concordância a elas, ou se a afirmação não se aplica para esta disciplina. Na outra parte do instrumento, você terá um espaço para indicar os aspectos positivos da disciplina e sugestões para melhorá-la.",
                         style: TextStyle(fontSize: 20)),
                   ),
@@ -163,7 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: const Text(
                               'Existem 25 questões neste questionário.',
                               style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ),
@@ -176,7 +173,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: const Text(
                               'O questionário é anônimo.',
                               style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ),
@@ -189,7 +185,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: const Text(
                               'O registro de suas respostas não contém nenhuma informação de identificação sobre você.',
                               style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ),

@@ -49,9 +49,8 @@ class VerificationScreen extends StatelessWidget {
                           title: const Padding(
                             padding: EdgeInsets.only(bottom: 8.0),
                             child: Text('Caro estudante,',
-                                textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                                    fontSize: 18, fontWeight: FontWeight.bold)),
                           ),
                           subtitle: Text(
                             !avaliable
@@ -62,7 +61,7 @@ class VerificationScreen extends StatelessWidget {
                                     ? FontWeight.w600
                                     : FontWeight.normal,
                                 color: !avaliable ? kRed : Colors.black,
-                                fontSize: !avaliable ? 16 : 20),
+                                fontSize: !avaliable ? 14 : 16),
                           )),
                     ),
                   ),

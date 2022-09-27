@@ -14,7 +14,7 @@ class Service {
   }
 
   Service._internal() {
-    defaultPath = "https://avaliacao-tcc.herokuapp.com";
+    defaultPath = "https://avaliacao-alunos-ft.herokuapp.com";
   }
 
   var client = http.Client();

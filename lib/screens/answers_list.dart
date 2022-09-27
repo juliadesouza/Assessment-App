@@ -143,7 +143,6 @@ class _AssessmentScreenState extends State<AnswersList> {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
                     item.question.statement,
-                    textAlign: TextAlign.justify,
                   ),
                 ),
                 item.question.type == QuestionType.multipleChoice
@@ -168,7 +167,6 @@ class _AssessmentScreenState extends State<AnswersList> {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                             item.question.answer,
-                            textAlign: TextAlign.justify,
                           ),
                         )
                       ])
