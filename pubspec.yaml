@@ -38,6 +38,7 @@ dependencies:
   intro_slider: ^3.0.10
   universal_platform: ^1.0.0+1
   intl: ^0.17.0
+  mobile_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,9 @@ flutter:
     - assets/images/question.png
     - assets/images/important.png
     - assets/images/owl.png
+    - assets/images/idea.png
+    - assets/images/likert.png
+    - assets/images/agree.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

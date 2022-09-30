@@ -55,7 +55,7 @@ class VerificationScreen extends StatelessWidget {
                           subtitle: Text(
                             !avaliable
                                 ? "A avaliação desta disciplina só está disponível de ${classroom.initialDate} até ${classroom.finalDate}."
-                                : 'Verifique as informações referentes a disciplina e depois clique no botão “Iniciar”.',
+                                : 'Verifique as informações referentes à disciplina e depois clique no botão “Iniciar”.',
                             style: TextStyle(
                                 fontWeight: !avaliable
                                     ? FontWeight.w600

@@ -2,7 +2,7 @@ import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/logic/home/home_bloc.dart';
 import 'package:assessment_app/model/classroom.dart';
 import 'package:assessment_app/screens/verification_screen.dart';
-import 'package:assessment_app/widgets/qrcode_button.dart';
+import 'package:assessment_app/screens/qrcode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,7 +93,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(50.0),
                           child: SizedBox(
                               height: 50,
-                              child: QRCodeButton(blocContext: context)),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
+                                onPressed: () => Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                        builder: (ctx) => QRCodeScreen(
+                                              blocContext: context,
+                                            ))),
+                                child: const Text("SCANEAR QR CODE",
+                                    style: TextStyle(
+                                        color: kBackground,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                              )),
                         ),
                       ],
                     )),
@@ -112,7 +128,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
-                        "Este instrumento tem como objetivo coletar informações para avaliar as disciplinas oferecidas na Faculdade de Tecnologia para que possamos aperfeiçoar as condições e metodologias de ensino e aprendizagem.",
+                        textAlign: TextAlign.center,
+                        "Avalie as disciplinas oferecidas na Faculdade de Tecnologia para que possamos aperfeiçoar as condições e metodologias de ensino e aprendizagem.",
                         style: TextStyle(fontSize: 20)),
                   ),
                 ),
@@ -125,13 +142,34 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.bold,
                         fontSize: 24),
                   ),
-                  pathImage: 'assets/images/tasks.png',
+                  pathImage: 'assets/images/likert.png',
                   widthImage: 150,
                   heightImage: 150,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
-                        "Uma parte do instrumento é formada por afirmações que você deve indicar o grau de concordância a elas, ou se a afirmação não se aplica para esta disciplina. Na outra parte do instrumento, você terá um espaço para indicar os aspectos positivos da disciplina e sugestões para melhorá-la.",
+                        textAlign: TextAlign.center,
+                        "As primeiras questões são formadas por afirmações e você deve indicar o grau de concordância com elas, ou se a afirmação não se aplica para esta disciplina.",
+                        style: TextStyle(fontSize: 20)),
+                  ),
+                ),
+                Slide(
+                  widgetTitle: const Text(
+                    "INFORMAÇÕES",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: kBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
+                  ),
+                  pathImage: 'assets/images/idea.png',
+                  widthImage: 150,
+                  heightImage: 150,
+                  widgetDescription: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                        textAlign: TextAlign.center,
+                        "Ao final, você terá um espaço para indicar os aspectos positivos da disciplina e sugestões para melhorá-la.",
                         style: TextStyle(fontSize: 20)),
                   ),
                 ),
@@ -151,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           margin: const EdgeInsets.only(bottom: 20.0),
@@ -164,15 +203,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20.0),
-                          child: ListTile(
-                            leading: Image.asset(
-                              'assets/images/person.png',
-                            ),
-                            title: const Text(
-                              'O questionário é anônimo.',
-                              style: TextStyle(fontSize: 18),
+                        Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 20.0),
+                            child: ListTile(
+                              leading: Image.asset(
+                                'assets/images/person.png',
+                              ),
+                              title: const Text(
+                                'O questionário é anônimo.',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ),
                           ),
                         ),
