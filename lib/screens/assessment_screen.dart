@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/database/form_database.dart';
 import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
@@ -7,7 +5,6 @@ import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/screens/answers_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../constants/enums.dart';
 import '../widgets/custom_stepper.dart';
 import '../widgets/question_widget.dart';
 
@@ -22,41 +19,28 @@ class AssessmentScreen extends StatefulWidget {
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
   int _currentStep = 0;
-  int _index = 0;
+  final _controller = new ScrollController();
 
   _stepState(int step, Question question) {
-    if ((_currentStep > step && question.answer != "") ||
-        question.answer != "" ||
-        (question.answer == "" &&
-            question.type == QuestionType.essay &&
-            _currentStep >= step)) {
+    if (_currentStep != step && question.answer != "") {
       return CustomStepState.complete;
     } else {
       return CustomStepState.editing;
     }
   }
 
-  List<List<CustomStep>> _steps(questions) {
-    List<List<CustomStep>> result = [];
+  List<CustomStep> _steps(questions) {
     List<CustomStep> arr = [];
-    int chunkSize = 4;
-    int state = 0;
 
     for (int i = 0; i < questions.length; i++) {
-      if (state == chunkSize) state = 0;
       arr.add(CustomStep(
           title: Text(questions[i].number.toString().padLeft(2, '0')),
           content: QuestionWidget(question: questions[i]),
-          state: _stepState(state, questions[i]),
-          isActive: _currentStep == state));
-      state += 1;
+          state: _stepState(i, questions[i]),
+          isActive: _currentStep == i));
     }
 
-    for (var i = 0; i < arr.length; i += chunkSize) {
-      result.add(arr.sublist(
-          i, i + chunkSize > arr.length ? arr.length : i + chunkSize));
-    }
-    return result;
+    return arr;
   }
 
   @override
@@ -74,23 +58,14 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 builder: (context, state) {
               if (state is QuestionsLoaded) {
                 return CustomStepper(
-                    key: Key(Random.secure().nextDouble().toString()),
                     type: CustomStepperType.horizontal,
-                    steps: _steps(state.questions)[_index],
+                    steps: _steps(state.questions),
                     currentStep: _currentStep,
                     onStepTapped: (step) => setState(() => _currentStep = step),
                     onStepContinue: () {
                       setState(() {
-                        if (_currentStep <
-                            _steps(state.questions)[_index].length - 1) {
+                        if (_currentStep < _steps(state.questions).length - 1) {
                           _currentStep += 1;
-                        } else {
-                          if (_index < _steps(state.questions).length - 1) {
-                            _index += 1;
-                          } else {
-                            _index = 0;
-                          }
-                          _currentStep = 0;
                         }
                       });
                     },
@@ -98,14 +73,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                       setState(() {
                         if (_currentStep > 0) {
                           _currentStep -= 1;
-                        } else {
-                          if (_index > 0 && _currentStep == 0) {
-                            _index -= 1;
-                            _currentStep =
-                                _steps(state.questions)[_index].length - 1;
-                          } else {
-                            _currentStep = 0;
-                          }
                         }
                       });
                     },
@@ -119,7 +86,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                               SizedBox(
                                 height: 40,
                                 width: 120,
-                                child: (!(_currentStep == 0 && _index == 0))
+                                child: (_currentStep != 0)
                                     ? ElevatedButton(
                                         onPressed: controls.onStepCancel,
                                         style: ElevatedButton.styleFrom(
@@ -137,11 +104,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                 height: 40,
                                 width: 120,
                                 child: (_currentStep ==
-                                            _steps(state.questions)[_index]
-                                                    .length -
-                                                1 &&
-                                        _index ==
-                                            _steps(state.questions).length - 1)
+                                        _steps(state.questions).length - 1)
                                     ? ElevatedButton(
                                         onPressed: () {
                                           BlocProvider.of<AssessmentBloc>(
