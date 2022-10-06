@@ -19,7 +19,6 @@ class AssessmentScreen extends StatefulWidget {
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
   int _currentStep = 0;
-  final _controller = new ScrollController();
 
   _stepState(int step, Question question) {
     if (_currentStep != step && question.answer != "") {
