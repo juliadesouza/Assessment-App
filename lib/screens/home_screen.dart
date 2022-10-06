@@ -6,6 +6,7 @@ import 'package:assessment_app/screens/qrcode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -78,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Image.asset(
                           'assets/images/logo.png',
-                          width: 270,
-                          height: 270,
+                          width: 35.w,
+                          height: 35.h,
                         ),
                         Container(
                           margin: const EdgeInsets.only(right: 50, left: 50),
@@ -90,32 +91,29 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(50.0),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 5.h, horizontal: 10.w),
                           child: SizedBox(
-                              height: 50,
+                              height: 7.h,
+                              width: 10.w,
                               child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                ),
                                 onPressed: () => Navigator.of(context)
                                     .push(MaterialPageRoute(
                                         builder: (ctx) => QRCodeScreen(
                                               blocContext: context,
                                             ))),
-                                child: const Text("SCANEAR QR CODE",
+                                child: const Text("LER QR CODE",
                                     style: TextStyle(
                                         color: kBackground,
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.normal)),
                               )),
                         ),
                       ],
                     )),
                 Slide(
                   widgetTitle: const Text(
-                    "INFORMAÇÕES",
+                    "AVALIAÇÃO",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kBlue,
@@ -123,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 22),
                   ),
                   pathImage: 'assets/images/graph.png',
-                  widthImage: 150,
-                  heightImage: 150,
+                  widthImage: 20.w,
+                  heightImage: 20.h,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
@@ -135,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Slide(
                   widgetTitle: const Text(
-                    "INFORMAÇÕES",
+                    "QUESTIONÁRIO",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kBlue,
@@ -143,8 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24),
                   ),
                   pathImage: 'assets/images/likert.png',
-                  widthImage: 150,
-                  heightImage: 150,
+                  widthImage: 20.w,
+                  heightImage: 20.h,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
@@ -155,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Slide(
                   widgetTitle: const Text(
-                    "INFORMAÇÕES",
+                    "QUESTIONÁRIO",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: kBlue,
@@ -163,8 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24),
                   ),
                   pathImage: 'assets/images/idea.png',
-                  widthImage: 150,
-                  heightImage: 150,
+                  widthImage: 20.w,
+                  heightImage: 20.h,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
@@ -183,8 +181,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24),
                   ),
                   pathImage: "assets/images/important.png",
-                  widthImage: 150,
-                  heightImage: 150,
+                  widthImage: 20.w,
+                  heightImage: 20.h,
                   widgetDescription: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
