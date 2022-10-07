@@ -37,8 +37,12 @@ class QRCodeScreen extends StatelessWidget {
                 controller: cameraController,
                 onDetect: (barcode, args) {
                   if (barcode.rawValue == null) {
+                    cameraController.stop();
+                    cameraController.dispose();
                     debugPrint('Failed to scan Barcode');
                   } else {
+                    cameraController.stop();
+                    cameraController.dispose();
                     final String code = barcode.rawValue!;
                     BlocProvider.of<HomeBloc>(blocContext)
                         .add(VerifyCode(code));
