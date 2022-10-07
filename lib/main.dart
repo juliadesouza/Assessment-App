@@ -4,7 +4,6 @@ import 'package:assessment_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assessment_app/constants/colors.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:sizer/sizer.dart';
 import 'model/form.dart';
 
 void main() async {
@@ -21,16 +20,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return MaterialApp(
-          title:
-              "Avaliação Institucional de Disciplinas da Faculdade de Tecnologia da Unicamp",
-          theme: ThemeData(
-            fontFamily: 'RobotoMono',
-            brightness: Brightness.light,
-            primaryColor: kBlue,
-          ),
-          home: const HomeScreen());
-    });
+    return MaterialApp(
+        title:
+            "Avaliação Institucional de Disciplinas da Faculdade de Tecnologia da Unicamp",
+        theme: ThemeData(
+          fontFamily: 'RobotoMono',
+          brightness: Brightness.light,
+          primaryColor: kBlue,
+        ),
+        home: const HomeScreen());
   }
 }

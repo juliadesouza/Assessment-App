@@ -6,7 +6,6 @@ import 'package:assessment_app/screens/qrcode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width > 0
+        ? MediaQuery.of(context).size.width
+        : 412;
+    double height = MediaQuery.of(context).size.height > 0
+        ? MediaQuery.of(context).size.height
+        : 869;
     return Scaffold(
       body: BlocProvider(
         create: (context) => HomeBloc(),
@@ -79,8 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Image.asset(
                           'assets/images/logo.png',
-                          width: 35.w,
-                          height: 35.h,
+                          width: 0.35 * width,
+                          height: 0.35 * height,
                         ),
                         Container(
                           margin: const EdgeInsets.only(right: 50, left: 50),
@@ -92,10 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              vertical: 5.h, horizontal: 10.w),
+                              vertical: 0.05 * height, horizontal: 0.1 * width),
                           child: SizedBox(
-                              height: 7.h,
-                              width: 10.w,
+                              height: 0.07 * height,
+                              width: 0.1 * width,
                               child: ElevatedButton(
                                 onPressed: () => Navigator.of(context)
                                     .push(MaterialPageRoute(
@@ -121,8 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 22),
                   ),
                   pathImage: 'assets/images/graph.png',
-                  widthImage: 20.w,
-                  heightImage: 20.h,
+                  widthImage: 0.2 * width,
+                  heightImage: 0.2 * height,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
@@ -141,8 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24),
                   ),
                   pathImage: 'assets/images/likert.png',
-                  widthImage: 20.w,
-                  heightImage: 20.h,
+                  widthImage: 0.2 * width,
+                  heightImage: 0.2 * height,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
@@ -161,8 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24),
                   ),
                   pathImage: 'assets/images/idea.png',
-                  widthImage: 20.w,
-                  heightImage: 20.h,
+                  widthImage: 0.2 * width,
+                  heightImage: 0.2 * height,
                   widgetDescription: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
@@ -181,8 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 24),
                   ),
                   pathImage: "assets/images/important.png",
-                  widthImage: 20.w,
-                  heightImage: 20.h,
+                  widthImage: 0.2 * width,
+                  heightImage: 0.2 * height,
                   widgetDescription: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(

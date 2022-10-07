@@ -37,7 +37,6 @@ dependencies:
   intro_slider: ^3.0.10
   intl: ^0.17.0
   mobile_scanner: ^2.0.0
-  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:
