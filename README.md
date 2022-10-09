@@ -1,16 +1,17 @@
-# assessment_app
+# Avaliação da FT
 
-A new Flutter project.
+Este é um aplicativo desenvolvido para o trabalho de conclusão de curso da Faculdade de Tecnologia da Unicamp. Este aplicativo foi desenvolvido utilizando-se o framework Flutter e é responsável por possibilitar que o corpo discente da FT avalie as atuais metodologias e práticas pedagógicas da referida faculdade. 
 
-## Getting Started
+O aplicativo apresenta um leitor de QR Code que valida o acesso ao formulário de avaliação. Este formulário é formado por 25 questões, sendo 22 delas questões de múltipla escolha que seguem a escala Likert e duas delas são compos de texto onde é possível fazer comentários extras e expressar opiniões. 
 
-This project is a starting point for a Flutter application.
+## Getting Started.
 
-A few resources to get you started if this is your first Flutter project:
+Para testar este projeto, basta:
+1. Clonar este repositório.
+2. Executar os comandos abaixo na ordem: 
+```
+flutter pub get
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter run
