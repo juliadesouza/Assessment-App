@@ -46,6 +46,7 @@ class QRCodeScreen extends StatelessWidget {
                     final String code = barcode.rawValue!;
                     BlocProvider.of<HomeBloc>(blocContext)
                         .add(VerifyCode(code));
+                    Navigator.pop(context);
                   }
                 }),
             QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5))
