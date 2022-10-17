@@ -34,15 +34,15 @@ List<Item> generateItems(int numberOfItems, List<Question> questions) {
   });
 }
 
-class AnswersList extends StatefulWidget {
-  const AnswersList({Key? key, required this.code}) : super(key: key);
+class AnswersScreen extends StatefulWidget {
+  const AnswersScreen({Key? key, required this.code}) : super(key: key);
 
   final String code;
   @override
-  State<AnswersList> createState() => _AssessmentScreenState();
+  State<AnswersScreen> createState() => _AssessmentScreenState();
 }
 
-class _AssessmentScreenState extends State<AnswersList> {
+class _AssessmentScreenState extends State<AnswersScreen> {
   List<Item> _data = [];
 
   @override

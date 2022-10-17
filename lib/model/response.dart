@@ -1,8 +1,8 @@
-import 'package:assessment_app/model/classroom.dart';
+import 'package:assessment_app/model/assessment.dart';
 
 class Response {
   final bool successfull;
-  final Classroom? classroom;
+  final Assessment? assessment;
 
-  Response(this.successfull, [this.classroom]);
+  Response(this.successfull, [this.assessment]);
 }
