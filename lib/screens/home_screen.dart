@@ -1,7 +1,7 @@
 import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/logic/home/home_bloc.dart';
-import 'package:assessment_app/model/classroom.dart';
-import 'package:assessment_app/screens/verification_screen.dart';
+import 'package:assessment_app/model/assessment.dart';
+import 'package:assessment_app/screens/info_screen.dart';
 import 'package:assessment_app/screens/qrcode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -30,10 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
         create: (context) => HomeBloc(),
         child: BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
           if (state is AuthenticatedCode) {
-            Classroom classroom = state.classroom!;
+            Assessment classroom = state.assessment!;
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    VerificationScreen(classroom: classroom)));
+                builder: (context) => InfoScreen(classroom: classroom)));
           }
 
           if (state is CodeError) {

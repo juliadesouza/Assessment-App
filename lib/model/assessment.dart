@@ -1,4 +1,4 @@
-class Classroom {
+class Assessment {
   final String classCode;
   final String subjectCode;
   final String subjectName;
@@ -8,7 +8,7 @@ class Classroom {
   final String initialDate;
   final String finalDate;
 
-  Classroom(
+  Assessment(
       this.classCode,
       this.subjectCode,
       this.subjectName,
@@ -18,9 +18,9 @@ class Classroom {
       this.initialDate,
       this.finalDate);
 
-  factory Classroom.fromJson(
+  factory Assessment.fromJson(
       Map<String, dynamic> jsonClass, Map<String, dynamic> jsonSubject) {
-    return Classroom(
+    return Assessment(
         jsonClass['codTurma'] as String,
         jsonSubject['codDisc'] as String,
         jsonSubject['nome'] as String,

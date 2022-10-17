@@ -2,7 +2,7 @@ import 'package:assessment_app/constants/colors.dart';
 import 'package:assessment_app/database/form_database.dart';
 import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
 import 'package:assessment_app/model/question.dart';
-import 'package:assessment_app/screens/answers_list.dart';
+import 'package:assessment_app/screens/answers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/custom_stepper.dart';
@@ -131,7 +131,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AnswersList(
+                        builder: (context) => AnswersScreen(
                               code: widget.code,
                             )));
               }

@@ -1,5 +1,5 @@
 import 'package:assessment_app/constants/colors.dart';
-import 'package:assessment_app/model/classroom.dart';
+import 'package:assessment_app/model/assessment.dart';
 import 'package:assessment_app/screens/home_screen.dart';
 import 'package:assessment_app/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +7,10 @@ import 'assessment_screen.dart';
 import 'dart:core';
 import 'package:intl/intl.dart';
 
-class VerificationScreen extends StatelessWidget {
-  const VerificationScreen({Key? key, required this.classroom})
+class InfoScreen extends StatelessWidget {
+  const InfoScreen({Key? key, required this.classroom})
       : super(key: key);
-  final Classroom classroom;
+  final Assessment classroom;
 
   @override
   Widget build(BuildContext context) {

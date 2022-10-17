@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import '../model/form.dart';
 import '../model/response.dart';
-import '../model/classroom.dart';
+import '../model/assessment.dart';
 
 class Service {
   static final Service _instance = Service._internal();
@@ -37,7 +37,7 @@ class Service {
           classResponse.statusCode == 200 && subjectResponse.statusCode == 200;
 
       if (successfull) {
-        Classroom classroom = Classroom.fromJson(
+        Assessment classroom = Assessment.fromJson(
             jsonDecode(classResponse.body), jsonDecode(subjectResponse.body));
         return Response(successfull, classroom);
       } else {
