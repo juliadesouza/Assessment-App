@@ -80,9 +80,7 @@ class _AssessmentScreenState extends State<AnswersScreen> {
               MaterialPageRoute(
                   builder: (context) => ResultScreen(
                         primaryMessage: "Desculpa!",
-                        secondaryMessage:
-                            "Não foi possível registrar suas respostas",
-                        errorMessage: state.message,
+                        secondaryMessage: state.message,
                         result: Result.error,
                       )),
             );

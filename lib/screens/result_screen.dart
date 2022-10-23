@@ -6,13 +6,11 @@ import '../constants/enums.dart';
 class ResultScreen extends StatelessWidget {
   final String primaryMessage;
   final String secondaryMessage;
-  final String errorMessage;
   final Result result;
   const ResultScreen(
       {Key? key,
       required this.primaryMessage,
       required this.secondaryMessage,
-      this.errorMessage = "",
       required this.result})
       : super(key: key);
 
@@ -62,11 +60,6 @@ class ResultScreen extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold)),
                   ),
-                  Text(errorMessage,
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: kRed)),
                 ]),
                 const Text(
                     "Você será redirecionado para a tela inicial em breve ou clique no botão abaixo para retornar para a tela inicial.",
