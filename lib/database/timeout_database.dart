@@ -12,7 +12,7 @@ class TimeoutDatabase {
 
   // Open a box and initialize box
   Future<void> open() async {
-    _box = await Hive.openBox<DateTime>('teste');
+    _box = await Hive.openBox<DateTime>('timeout');
   }
 
   // Set last assessment datetime
