@@ -7,3 +7,5 @@ class VerifyCode extends HomeEvent {
 
   VerifyCode(this.code);
 }
+
+class VerifyTimeout extends HomeEvent {}

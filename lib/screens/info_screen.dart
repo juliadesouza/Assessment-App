@@ -8,8 +8,7 @@ import 'dart:core';
 import 'package:intl/intl.dart';
 
 class InfoScreen extends StatelessWidget {
-  const InfoScreen({Key? key, required this.classroom})
-      : super(key: key);
+  const InfoScreen({Key? key, required this.classroom}) : super(key: key);
   final Assessment classroom;
 
   @override

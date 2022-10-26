@@ -1,5 +1,5 @@
 import 'package:assessment_app/constants/colors.dart';
-import 'package:assessment_app/database/form_database.dart';
+import 'package:assessment_app/database/assessment_database.dart';
 import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
 import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/screens/result_screen.dart';
@@ -48,7 +48,7 @@ class _AssessmentScreenState extends State<AnswersScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AssessmentBloc(FormDatabase(widget.code))
+        create: (context) => AssessmentBloc(AssessmentDatabase(widget.code))
           ..add(const LoadQuestions()),
         child: BlocConsumer<AssessmentBloc, AssessmentState>(
             builder: (context, state) {

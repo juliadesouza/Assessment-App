@@ -1,5 +1,5 @@
 import 'package:assessment_app/constants/colors.dart';
-import 'package:assessment_app/database/form_database.dart';
+import 'package:assessment_app/database/assessment_database.dart';
 import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
 import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/screens/answers_screen.dart';
@@ -48,10 +48,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         appBar: AppBar(
           title: const Text("AVALIAÇÃO",
               style: TextStyle(fontWeight: FontWeight.bold)),
-          automaticallyImplyLeading: false,
         ),
         body: BlocProvider(
-            create: (context) => AssessmentBloc(FormDatabase(widget.code))
+            create: (context) => AssessmentBloc(AssessmentDatabase(widget.code))
               ..add(const LoadQuestions()),
             child: BlocConsumer<AssessmentBloc, AssessmentState>(
                 builder: (context, state) {

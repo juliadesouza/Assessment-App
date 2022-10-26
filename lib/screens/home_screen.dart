@@ -64,6 +64,43 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 });
           }
+
+          if (state is Timeout) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text(
+                      "Ops!",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, color: kBlue),
+                    ),
+                    content: Text(
+                      "Aguarde ${state.waitingTimeLeft} minutos antes de iniciar outra avaliação.",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 18),
+                    ),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kBlue,
+                                  fontSize: 18))),
+                    ],
+                  );
+                });
+          }
+
+          if (state is Avaliabled) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => QRCodeScreen(
+                      blocContext: context,
+                    )));
+          }
         }, builder: (context, state) {
           if (state is UnauthenticatedCode) {
             return IntroSlider(
@@ -101,11 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 0.07 * height,
                               width: 0.1 * width,
                               child: ElevatedButton(
-                                onPressed: () => Navigator.of(context)
-                                    .push(MaterialPageRoute(
-                                        builder: (ctx) => QRCodeScreen(
-                                              blocContext: context,
-                                            ))),
+                                onPressed: () {
+                                  BlocProvider.of<HomeBloc>(context)
+                                      .add(VerifyTimeout());
+                                },
                                 child: const Text("LER QR CODE",
                                     style: TextStyle(
                                         color: kBackground,
