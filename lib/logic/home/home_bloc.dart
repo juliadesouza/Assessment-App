@@ -13,7 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       await TimeoutDatabase().open();
       DateTime? last = await TimeoutDatabase().getLastAssessmentDatetime();
       if (last == null) {
-        emit(Avaliabled());
+        emit(Avaliable());
         emit(UnauthenticatedCode());
       } else {
         DateTime current = DateTime.now();
@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             last.add(const Duration(minutes: 30)).difference(current);
 
         if (diff.inMinutes <= 0) {
-          emit(Avaliabled());
+          emit(Avaliable());
           emit(UnauthenticatedCode());
         } else {
           emit(Timeout(diff.inMinutes.toString()));

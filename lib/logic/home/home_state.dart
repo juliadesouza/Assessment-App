@@ -24,4 +24,4 @@ class Timeout extends HomeState {
   Timeout(this.waitingTimeLeft);
 }
 
-class Avaliabled extends HomeState {}
+class Avaliable extends HomeState {}

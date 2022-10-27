@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
           }
 
-          if (state is Avaliabled) {
+          if (state is Avaliable) {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (ctx) => QRCodeScreen(
                       blocContext: context,
