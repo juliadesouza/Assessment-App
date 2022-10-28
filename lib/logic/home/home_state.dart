@@ -4,10 +4,7 @@ abstract class HomeState {}
 
 class Authenticating extends HomeState {}
 
-class UnauthenticatedCode extends HomeState {
-  final bool? avaliable;
-  UnauthenticatedCode([this.avaliable]);
-}
+class UnauthenticatedCode extends HomeState {}
 
 class AuthenticatedCode extends HomeState {
   final Assessment? assessment;
