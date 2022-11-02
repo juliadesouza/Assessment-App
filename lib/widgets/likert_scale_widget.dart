@@ -1,4 +1,4 @@
-import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
+import 'package:assessment_app/logic/form/form_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class _LikertScaleWidgetState extends State<LikertScaleWidget> {
             setState(() {
               _option = value;
             });
-            BlocProvider.of<AssessmentBloc>(context)
+            BlocProvider.of<FormBloc>(context)
                 .add(RegisterAnswer(widget.question.number, value!));
           },
         ),
@@ -68,7 +68,7 @@ class _LikertScaleWidgetState extends State<LikertScaleWidget> {
             setState(() {
               _option = value;
             });
-            BlocProvider.of<AssessmentBloc>(context)
+            BlocProvider.of<FormBloc>(context)
                 .add(RegisterAnswer(widget.question.number, value!));
           },
         ),
@@ -90,7 +90,7 @@ class _LikertScaleWidgetState extends State<LikertScaleWidget> {
             setState(() {
               _option = value;
             });
-            BlocProvider.of<AssessmentBloc>(context)
+            BlocProvider.of<FormBloc>(context)
                 .add(RegisterAnswer(widget.question.number, value!));
           },
         ),
@@ -114,7 +114,7 @@ class _LikertScaleWidgetState extends State<LikertScaleWidget> {
             setState(() {
               _option = value;
             });
-            BlocProvider.of<AssessmentBloc>(context)
+            BlocProvider.of<FormBloc>(context)
                 .add(RegisterAnswer(widget.question.number, value!));
           },
         ),
@@ -136,7 +136,7 @@ class _LikertScaleWidgetState extends State<LikertScaleWidget> {
             setState(() {
               _option = value;
             });
-            BlocProvider.of<AssessmentBloc>(context)
+            BlocProvider.of<FormBloc>(context)
                 .add(RegisterAnswer(widget.question.number, value!));
           },
         ),
@@ -161,7 +161,7 @@ class _LikertScaleWidgetState extends State<LikertScaleWidget> {
             setState(() {
               _option = value;
             });
-            BlocProvider.of<AssessmentBloc>(context)
+            BlocProvider.of<FormBloc>(context)
                 .add(RegisterAnswer(widget.question.number, value!));
           },
         ),

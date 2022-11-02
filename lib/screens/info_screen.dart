@@ -3,7 +3,7 @@ import 'package:assessment_app/model/assessment.dart';
 import 'package:assessment_app/screens/home_screen.dart';
 import 'package:assessment_app/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
-import 'assessment_screen.dart';
+import 'form_screen.dart';
 import 'dart:core';
 import 'package:intl/intl.dart';
 
@@ -100,8 +100,8 @@ class InfoScreen extends StatelessWidget {
                     onPressed: avaliable
                         ? () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => AssessmentScreen(
-                                    code: classroom.classCode)));
+                                builder: (context) =>
+                                    FormScreen(code: classroom.classCode)));
                           }
                         : null,
                     style: ElevatedButton.styleFrom(

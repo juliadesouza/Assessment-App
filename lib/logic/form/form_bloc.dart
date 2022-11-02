@@ -1,5 +1,5 @@
 import 'package:assessment_app/database/timeout_database.dart';
-import 'package:assessment_app/database/assessment_database.dart';
+import 'package:assessment_app/database/form_database.dart';
 import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/model/response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,25 +8,25 @@ import 'package:hive/hive.dart';
 import '../../model/form.dart';
 import '../../services/service.dart';
 
-part 'assessment_event.dart';
-part 'assessment_state.dart';
+part 'form_event.dart';
+part 'form_state.dart';
 
-class AssessmentBloc extends Bloc<AssessmentEvent, AssessmentState> {
-  final AssessmentDatabase _assessmentDatabase;
+class FormBloc extends Bloc<FormEvent, FormState> {
+  final FormDatabase _formDatabase;
   late final Box<DateTime> box;
 
-  AssessmentBloc(this._assessmentDatabase) : super(LoadingQuestions()) {
+  FormBloc(this._formDatabase) : super(LoadingQuestions()) {
     on<LoadQuestions>((event, emit) async {
-      var questions = await _assessmentDatabase.getQuestions();
+      var questions = await _formDatabase.getQuestions();
       emit(QuestionsLoaded(questions));
     });
 
     on<RegisterAnswer>((event, emit) async {
-      await _assessmentDatabase.updateQuestionAnswer(event.number, event.answer);
+      await _formDatabase.updateQuestionAnswer(event.number, event.answer);
     });
 
-    on<RegisterAssessment>((event, emit) async {
-      Form form = await _assessmentDatabase.getForm();
+    on<RegisterForm>((event, emit) async {
+      Form form = await _formDatabase.getForm();
       Response response = await Service().registerAssessment(form);
       if (response.successfull) {
         TimeoutDatabase().setLastAssessmentDatetime(form.end);
@@ -37,12 +37,12 @@ class AssessmentBloc extends Bloc<AssessmentEvent, AssessmentState> {
     });
 
     on<VerifyAnswers>((event, emit) async {
-      var completed = await _assessmentDatabase.completed();
+      var completed = await _formDatabase.completed();
       if (!completed) {
-        emit(AssessmentIncompleted(
+        emit(FormIncompleted(
             "Certifique-se de que todas as perguntas foram respondidas antes de continuar."));
       } else {
-        emit(AssessmentCompleted());
+        emit(FormCompleted());
       }
       add(const LoadQuestions());
     });

@@ -1,6 +1,6 @@
 import 'package:assessment_app/constants/colors.dart';
-import 'package:assessment_app/database/assessment_database.dart';
-import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
+import 'package:assessment_app/database/form_database.dart';
+import 'package:assessment_app/logic/form/form_bloc.dart' as form_bloc;
 import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/screens/answers_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/custom_stepper.dart';
 import '../widgets/question_widget.dart';
 
-class AssessmentScreen extends StatefulWidget {
-  const AssessmentScreen({Key? key, required this.code}) : super(key: key);
+class FormScreen extends StatefulWidget {
+  const FormScreen({Key? key, required this.code}) : super(key: key);
 
   final String code;
 
   @override
-  State<AssessmentScreen> createState() => _AssessmentScreenState();
+  State<FormScreen> createState() => _FormScreenState();
 }
 
-class _AssessmentScreenState extends State<AssessmentScreen> {
+class _FormScreenState extends State<FormScreen> {
   int _currentStep = 0;
 
   _stepState(int step, Question question) {
@@ -50,11 +50,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         body: BlocProvider(
-            create: (context) => AssessmentBloc(AssessmentDatabase(widget.code))
-              ..add(const LoadQuestions()),
-            child: BlocConsumer<AssessmentBloc, AssessmentState>(
+            create: (context) => form_bloc.FormBloc(FormDatabase(widget.code))
+              ..add(const form_bloc.LoadQuestions()),
+            child: BlocConsumer<form_bloc.FormBloc, form_bloc.FormState>(
                 builder: (context, state) {
-              if (state is QuestionsLoaded) {
+              if (state is form_bloc.QuestionsLoaded) {
                 return CustomStepper(
                     type: CustomStepperType.horizontal,
                     steps: _steps(state.questions),
@@ -105,9 +105,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                         _steps(state.questions).length - 1)
                                     ? ElevatedButton(
                                         onPressed: () {
-                                          BlocProvider.of<AssessmentBloc>(
+                                          BlocProvider.of<form_bloc.FormBloc>(
                                                   context)
-                                              .add(VerifyAnswers());
+                                              .add(form_bloc.VerifyAnswers());
                                         },
                                         child: const Text(
                                           'Finalizar',
@@ -126,7 +126,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               }
               return Container();
             }, listener: (context, state) {
-              if (state is AssessmentCompleted) {
+              if (state is form_bloc.FormCompleted) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -135,7 +135,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                             )));
               }
 
-              if (state is AssessmentIncompleted) {
+              if (state is form_bloc.FormIncompleted) {
                 showDialog(
                     context: context,
                     builder: (context) {

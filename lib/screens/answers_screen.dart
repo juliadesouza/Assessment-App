@@ -1,6 +1,6 @@
 import 'package:assessment_app/constants/colors.dart';
-import 'package:assessment_app/database/assessment_database.dart';
-import 'package:assessment_app/logic/assessment/assessment_bloc.dart';
+import 'package:assessment_app/database/form_database.dart';
+import 'package:assessment_app/logic/form/form_bloc.dart' as form_bloc;
 import 'package:assessment_app/model/question.dart';
 import 'package:assessment_app/screens/result_screen.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +48,9 @@ class _AssessmentScreenState extends State<AnswersScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AssessmentBloc(AssessmentDatabase(widget.code))
-          ..add(const LoadQuestions()),
-        child: BlocConsumer<AssessmentBloc, AssessmentState>(
+        create: (context) => form_bloc.FormBloc(FormDatabase(widget.code))
+          ..add(const form_bloc.LoadQuestions()),
+        child: BlocConsumer<form_bloc.FormBloc, form_bloc.FormState>(
             builder: (context, state) {
           return Scaffold(
               appBar: AppBar(
@@ -59,23 +59,23 @@ class _AssessmentScreenState extends State<AnswersScreen> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  BlocProvider.of<AssessmentBloc>(context)
-                      .add(RegisterAssessment());
+                  BlocProvider.of<form_bloc.FormBloc>(context)
+                      .add(form_bloc.RegisterForm());
                 },
                 backgroundColor: kBlue,
                 child: const Icon(Icons.send),
               ),
-              body: (state is QuestionsLoaded
+              body: (state is form_bloc.QuestionsLoaded
                   ? ListView(children: [
                       _buildPanel(),
                     ])
                   : Container()));
         }, listener: (context, state) {
-          if (state is QuestionsLoaded) {
+          if (state is form_bloc.QuestionsLoaded) {
             _data = generateItems(state.questions.length, state.questions);
           }
 
-          if (state is Error) {
+          if (state is form_bloc.Error) {
             Navigator.of(context).push(
               MaterialPageRoute(
                   builder: (context) => ResultScreen(
@@ -86,7 +86,7 @@ class _AssessmentScreenState extends State<AnswersScreen> {
             );
           }
 
-          if (state is Sucessfull) {
+          if (state is form_bloc.Sucessfull) {
             Navigator.of(context).push(
               MaterialPageRoute(
                   builder: (context) => const ResultScreen(

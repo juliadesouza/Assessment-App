@@ -4,7 +4,7 @@ import 'package:assessment_app/widgets/likert_scale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../constants/enums.dart';
-import '../logic/assessment/assessment_bloc.dart';
+import '../logic/form/form_bloc.dart';
 
 class QuestionWidget extends StatefulWidget {
   const QuestionWidget({Key? key, required this.question}) : super(key: key);
@@ -49,7 +49,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               maxLines: null,
               expands: true,
               onChanged: (String? value) {
-                BlocProvider.of<AssessmentBloc>(context).add(RegisterAnswer(
+                BlocProvider.of<FormBloc>(context).add(RegisterAnswer(
                     widget.question.number, textController.text));
               },
               decoration: const InputDecoration(

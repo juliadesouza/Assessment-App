@@ -4,15 +4,15 @@ import 'package:assessment_app/model/form.dart';
 import '../constants/enums.dart';
 import '../model/question.dart';
 
-class AssessmentDatabase {
+class FormDatabase {
   late Box<Form> _box;
   final String code;
 
-  AssessmentDatabase(this.code);
+  FormDatabase(this.code);
 
   // Open a box and initialize box
   Future<void> open() async {
-    _box = await Hive.openBox<Form>('assessment');
+    _box = await Hive.openBox<Form>('form');
   }
 
   // Get all questions
@@ -29,35 +29,30 @@ class AssessmentDatabase {
 
   // Update question
   Future<void> updateQuestionAnswer(int number, String answer) async {
-    final assessmentToEdit = _box.get(code);
+    final formToEdit = _box.get(code);
 
-    final List<Question> questionsList = assessmentToEdit!.questions;
+    final List<Question> questionsList = formToEdit!.questions;
     int indexQuestion =
         questions.indexWhere((question) => question.number == number);
     questionsList[indexQuestion].answer = answer;
 
-    _box.put(
-        code,
-        Form(
-            code, assessmentToEdit.start, assessmentToEdit.end, questionsList));
+    _box.put(code, Form(code, formToEdit.start, formToEdit.end, questionsList));
   }
 
   Future<bool> completed() async {
-    final assessmentToEdit = _box.get(code);
+    final formToEdit = _box.get(code);
 
     var emptyQuestion = false;
-    for (var i = 0; i < assessmentToEdit!.questions.length; i++) {
-      if (assessmentToEdit.questions[i].type == QuestionType.multipleChoice &&
-          assessmentToEdit.questions[i].answer == "") {
+    for (var i = 0; i < formToEdit!.questions.length; i++) {
+      if (formToEdit.questions[i].type == QuestionType.multipleChoice &&
+          formToEdit.questions[i].answer == "") {
         emptyQuestion = true;
       }
     }
 
     if (!emptyQuestion) {
-      _box.put(
-          code,
-          Form(code, assessmentToEdit.start, DateTime.now(),
-              assessmentToEdit.questions));
+      _box.put(code,
+          Form(code, formToEdit.start, DateTime.now(), formToEdit.questions));
       return true;
     }
     return false;

@@ -58,17 +58,18 @@ class Service {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
-          'cod': form.code,
+          'codTurma': form.code,
           'dataIni': form.start.toString(),
           'dataFim': form.end.toString(),
           'questoes': form.questionsToJson()
         }),
       );
 
-      bool successfull = response.statusCode == 201;
+      bool successfull = response.statusCode == 200;
       log("Formulario: [${response.statusCode}] - ${response.reasonPhrase}");
       return Response(successfull);
     } catch (e) {
+      log("Erro: ${e.toString()}}");
       return Response(false);
     }
   }
