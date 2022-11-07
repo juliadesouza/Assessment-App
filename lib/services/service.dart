@@ -23,7 +23,7 @@ class Service {
     bool successfull = false;
     try {
       final classResponse = await client.get(
-        Uri.parse("$defaultPath/turmas/$code"),
+        Uri.parse("$defaultPath/turmas/${code.trim()}"),
       );
 
       final subjectResponse = classResponse.statusCode == 200
