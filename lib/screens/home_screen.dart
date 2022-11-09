@@ -236,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               'assets/images/question.png',
                             ),
                             title: const Text(
-                              'Existem 25 questões neste questionário.',
+                              'Existem 26 questões neste questionário.',
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
